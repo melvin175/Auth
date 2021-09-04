@@ -40,11 +40,11 @@ router.post("/login", async (req, res) => {
 
   //Check if user exists in db
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send("Email or passowrd is wrong");
+  if (!user) return res.status(400).send("Email or passwordd is wrong");
 
   //Password check
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).send("Invalid Passcode");
+  if (!validPassword) return res.status(400).send("Invalid Passcode!");
 
   //Create an token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
