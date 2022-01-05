@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-export const corsOptions = {
+const corsOptions = {
   origin: ["http://localhost:3000/", "http://localhost:5000/"],
   optionsSuccessStatus: 200,
   credentials: true,
