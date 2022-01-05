@@ -1,14 +1,15 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const corsOptions = {
-  origin: ["http://localhost:3000/", "http://localhost:5000/"],
-  optionsSuccessStatus: 200,
-  credentials: true,
-  exposedHeaders: ["set-cookie"],
-};
-
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      return callback(null, true);
+    },
+    credentials: true,
+    optionsSuccessStatus: 200,
+  })
+);
 const mogoose = require("mongoose");
 
 //connect to mognoose
