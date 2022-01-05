@@ -1,6 +1,13 @@
 const express = require("express");
 const app = express();
-// const dotenv = require("dotenv");
+export const corsOptions = {
+  origin: ["http://localhost:3000/", "http://localhost:5000/"],
+  optionsSuccessStatus: 200,
+  credentials: true,
+  exposedHeaders: ["set-cookie"],
+};
+
+app.use(cors(corsOptions));
 const mogoose = require("mongoose");
 
 //connect to mognoose
