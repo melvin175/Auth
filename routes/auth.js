@@ -51,4 +51,23 @@ router.post("/login", async (req, res) => {
   res.header("auth-token", token).send(token);
 });
 
+router.get("/user", async (req, res) => {
+  const { email } = req.user;
+  try {
+    const user = await User.findOne({ email }, { password: 0 });
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        msg: "Not authorized",
+      });
+    }
+    sendCookie(user, 200, "You are logged in", "USER_LOGGED_IN", res);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      msg: error,
+    });
+  }
+});
+
 module.exports = router;
